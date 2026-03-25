@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Secret Image Unlock</title>
     <style>
         body {
@@ -10,11 +11,10 @@
             margin-top: 80px;
         }
 
-        .secretImage {
-            display: none;
+        img {
             max-width: 300px;
-            margin: 20px auto;   /* centers the image */
-            display: block;      /* required for auto-centering */
+            margin: 20px auto;
+            display: block;
         }
     </style>
 </head>
@@ -28,22 +28,17 @@
     <p id="message"></p>
 
     <!-- Images for Q1–Q7 -->
-    <img id="q1" class="secretImage" src="Q1.png" alt="Q1 Image">
-    <img id="q2" class="secretImage" src="Q2.png" alt="Q2 Image">
-    <img id="q3" class="secretImage" src="Q3.png" alt="Q3 Image">
-    <img id="q4" class="secretImage" src="Q4.png" alt="Q4 Image">
-    <img id="q5" class="secretImage" src="Q5.png" alt="Q5 Image">
-    <img id="q6" class="secretImage" src="Q6.png" alt="Q6 Image">
-    <img id="q7" class="secretImage" src="Q7.png" alt="Q7 Image">
+    <img id="q1" src="Q1.png" alt="Q1 Image" hidden>
+    <img id="q2" src="Q2.png" alt="Q2 Image" hidden>
+    <img id="q3" src="Q3.png" alt="Q3 Image" hidden>
+    <img id="q4" src="Q4.png" alt="Q4 Image" hidden>
+    <img id="q5" src="Q5.png" alt="Q5 Image" hidden>
+    <img id="q6" src="Q6.png" alt="Q6 Image" hidden>
+    <img id="q7" src="Q7.png" alt="Q7 Image" hidden>
 
     <script>
-        // Map all accepted answers to their corresponding image
         const answerMap = {
             "west": "q1",
-            "West": "q1",
-            "WEST": "q1",
-            "w": "q1",
-            "W": "q1",
             "7": "q2",
             "seven": "q2",
             "18": "q3",
@@ -51,8 +46,6 @@
             "32": "q5",
             "1960": "q6",
             "ireland": "q7",
-            "Ireland": "q7",
-            "Irish": "q7",
             "irish": "q7"
         };
 
@@ -60,13 +53,14 @@
             const userCode = document.getElementById("codeInput").value.trim().toLowerCase();
             const message = document.getElementById("message");
 
-            // Hide all images
-            document.querySelectorAll(".secretImage").forEach(img => img.style.display = "none");
+            // Hide all images first
+            document.querySelectorAll("img").forEach(img => {
+                img.hidden = true;
+            });
 
-            // Check if answer matches
             if (answerMap[userCode]) {
                 const imageId = answerMap[userCode];
-                document.getElementById(imageId).style.display = "block";
+                document.getElementById(imageId).hidden = false;
                 message.textContent = "Correct!";
             } else {
                 message.textContent = "Incorrect code.";
