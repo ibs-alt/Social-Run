@@ -11,9 +11,13 @@
             margin-top: 80px;
         }
 
-        img {
+        .secretImage {
             max-width: 300px;
             margin: 20px auto;
+            display: none;
+        }
+
+        .secretImage.show {
             display: block;
         }
     </style>
@@ -28,13 +32,13 @@
     <p id="message"></p>
 
     <!-- Images for Q1–Q7 -->
-    <img id="q1" src="Q1.png" alt="Q1 Image" hidden>
-    <img id="q2" src="Q2.png" alt="Q2 Image" hidden>
-    <img id="q3" src="Q3.png" alt="Q3 Image" hidden>
-    <img id="q4" src="Q4.png" alt="Q4 Image" hidden>
-    <img id="q5" src="Q5.png" alt="Q5 Image" hidden>
-    <img id="q6" src="Q6.png" alt="Q6 Image" hidden>
-    <img id="q7" src="Q7.png" alt="Q7 Image" hidden>
+    <img id="q1" class="secretImage" src="Q1.png" alt="Q1 Image">
+    <img id="q2" class="secretImage" src="Q2.png" alt="Q2 Image">
+    <img id="q3" class="secretImage" src="Q3.png" alt="Q3 Image">
+    <img id="q4" class="secretImage" src="Q4.png" alt="Q4 Image">
+    <img id="q5" class="secretImage" src="Q5.png" alt="Q5 Image">
+    <img id="q6" class="secretImage" src="Q6.png" alt="Q6 Image">
+    <img id="q7" class="secretImage" src="Q7.png" alt="Q7 Image">
 
     <script>
         const answerMap = {
@@ -54,13 +58,13 @@
             const message = document.getElementById("message");
 
             // Hide all images first
-            document.querySelectorAll("img").forEach(img => {
-                img.hidden = true;
+            document.querySelectorAll(".secretImage").forEach(img => {
+                img.classList.remove("show");
             });
 
             if (answerMap[userCode]) {
                 const imageId = answerMap[userCode];
-                document.getElementById(imageId).hidden = false;
+                document.getElementById(imageId).classList.add("show");
                 message.textContent = "Correct!";
             } else {
                 message.textContent = "Incorrect code.";
